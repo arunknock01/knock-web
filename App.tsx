@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { SECTIONS, NAV_ITEMS, APP_NAME, DOC_VERSION } from './constants';
 import { VisualPortal, VisualGrid, VisualColor, VisualTypography, VisualIcon } from './components/Visuals';
+import { Modal, PrivacyContent, TermsContent } from './components/Modals';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>(NAV_ITEMS[0].id);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
 
   // Scroll spy to update active section
   useEffect(() => {
@@ -173,8 +176,8 @@ const App: React.FC = () => {
                 <div className="flex space-x-8 text-sm font-medium text-gray-600">
                     <a href="#" className="hover:text-black transition-colors">Twitter</a>
                     <a href="https://www.instagram.com/knock.1.0?igsh=MWVyMHFsM3Jhbno4ZA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">Instagram</a>
-                    <a href="#" className="hover:text-black transition-colors">Privacy</a>
-                    <a href="#" className="hover:text-black transition-colors">Terms</a>
+                    <button onClick={() => setIsPrivacyOpen(true)} className="hover:text-black transition-colors">Privacy</button>
+                    <button onClick={() => setIsTermsOpen(true)} className="hover:text-black transition-colors">Terms</button>
                 </div>
             </div>
             <div className="mt-12 text-xs text-gray-300 text-center md:text-left">
@@ -182,6 +185,16 @@ const App: React.FC = () => {
             </div>
         </footer>
       </main>
+
+      {/* Modals */}
+      <Modal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} title="Privacy Policy">
+        <PrivacyContent />
+      </Modal>
+
+      <Modal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} title="Terms of Service">
+        <TermsContent />
+      </Modal>
+
     </div>
   );
 };
