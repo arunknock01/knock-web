@@ -1,0 +1,155 @@
+import React from 'react';
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+}
+
+export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity animate-in fade-in duration-300" 
+        onClick={onClose}
+      />
+      
+      {/* Modal Content */}
+      <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl max-h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-bottom-4 duration-300">
+        <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-white z-10">
+          <h2 className="text-xl font-bold tracking-tight">{title}</h2>
+          <button 
+            onClick={onClose}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500 hover:text-black"
+            aria-label="Close modal"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <div className="p-6 overflow-y-auto overflow-x-hidden">
+          <div className="prose prose-sm prose-gray max-w-none prose-headings:font-bold prose-headings:text-black prose-p:leading-relaxed prose-li:marker:text-gray-400">
+            {children}
+          </div>
+        </div>
+        
+        <div className="p-6 border-t border-gray-100 bg-gray-50 flex justify-end">
+            <button 
+              onClick={onClose} 
+              className="bg-black text-white px-8 py-3 rounded-xl text-sm font-medium hover:bg-gray-800 transition-all hover:scale-[1.02] shadow-lg shadow-black/10"
+            >
+                I Understand
+            </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const PrivacyContent = () => (
+  <div className="space-y-6 text-gray-600">
+    <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 text-xs text-gray-500 font-mono mb-6">
+      LAST UPDATED: OCTOBER 2025
+    </div>
+
+    <section>
+        <h3>1. Introduction</h3>
+        <p>Knock Inc. ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share your personal information when you use our mobile application and services (collectively, the "Service"). By using Knock, you consent to the data practices described in this policy.</p>
+    </section>
+
+    <section>
+        <h3>2. Information We Collect</h3>
+        <p>To provide our unique O2O (Online-to-Offline) experience, we collect specific types of data:</p>
+        <ul className="list-disc pl-5 space-y-2">
+            <li><strong>Location Data:</strong> This is the core of our "Radar" feature. We collect precise geolocation data only while the app is in use to detect nearby users. We do <strong>not</strong> store historical location trails or track you when the app is fully closed.</li>
+            <li><strong>Identity Data:</strong> When you create an account, we may collect verification details (such as phone number or biometrics) to ensure safety. Your full profile (name, photo, bio) is protected by our "Progressive Disclosure" system and is only revealed to others upon mutual acceptance of a Knock.</li>
+            <li><strong>Usage Metrics:</strong> We collect anonymous data on interaction patterns to optimize network performance and user experience.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>3. How We Use Your Information</h3>
+        <p>We use your data strictly to:</p>
+        <ul className="list-disc pl-5 space-y-2">
+            <li>Facilitate real-time, hyper-local connections.</li>
+            <li>Verify identity and maintain the safety of the community.</li>
+            <li>Prevent fraud, spam, and abuse.</li>
+            <li>Improve the technical infrastructure of the Service.</li>
+        </ul>
+        <p>We strictly do <strong>not</strong> sell your personal data to third-party advertisers or data brokers.</p>
+    </section>
+
+    <section>
+        <h3>4. Data Security</h3>
+        <p>We implement enterprise-grade security measures, including AES-256 encryption for data at rest and TLS 1.3 for data in transit. While we strive to protect your personal information, no method of transmission over the Internet is 100% secure.</p>
+    </section>
+
+    <section>
+        <h3>5. User Rights</h3>
+        <p>You have the right to request access to, correction of, or deletion of your personal data at any time directly through the app settings or by contacting our Data Protection Officer.</p>
+    </section>
+
+    <section>
+        <h3>6. Contact Us</h3>
+        <p>If you have questions about this policy, please contact us at <a href="mailto:privacy@knock.app" className="text-black underline underline-offset-2">privacy@knock.app</a>.</p>
+    </section>
+  </div>
+);
+
+export const TermsContent = () => (
+  <div className="space-y-6 text-gray-600">
+    <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 text-xs text-gray-500 font-mono mb-6">
+      EFFECTIVE DATE: OCTOBER 2025
+    </div>
+
+    <section>
+        <h3>1. Acceptance of Terms</h3>
+        <p>By downloading, accessing, or using the Knock mobile application, you agree to be bound by these Terms of Service. If you do not agree to these terms, you must strictly not use the application.</p>
+    </section>
+
+    <section>
+        <h3>2. Eligibility</h3>
+        <p>You must be at least 18 years of age to use Knock. By using the Service, you represent and warrant that you meet this eligibility requirement.</p>
+    </section>
+
+    <section>
+        <h3>3. User Conduct</h3>
+        <p>You agree to use Knock responsibly. You are strictly prohibited from:</p>
+        <ul className="list-disc pl-5 space-y-2">
+            <li>Harassing, stalking, threatening, or intimidating other users.</li>
+            <li>Impersonating any person or entity.</li>
+            <li>Using the app for any illegal purposes or solicitation of illegal acts.</li>
+            <li>Attempting to reverse engineer the location algorithms or API.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>4. Real-World Safety & Disclaimer</h3>
+        <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-black my-4">
+            <p className="text-sm font-medium text-black m-0"><strong>IMPORTANT SAFETY NOTICE</strong></p>
+            <p className="text-sm mt-1 m-0">Knock facilitates real-world meetups. You acknowledge that you are solely responsible for your interactions with other users. Knock Inc. conducts basic verification but cannot guarantee the behavior, background, or safety of any user offline. Always meet in public places, tell a friend where you are, and trust your instincts.</p>
+        </div>
+    </section>
+
+    <section>
+        <h3>5. Termination</h3>
+        <p>We reserve the right to suspend or terminate your access to the Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+    </section>
+
+    <section>
+        <h3>6. Limitation of Liability</h3>
+        <p>To the maximum extent permitted by applicable law, Knock Inc. shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your access to or use of, or inability to access or use, the Service.</p>
+    </section>
+    
+    <section>
+        <h3>7. Governing Law</h3>
+        <p>These Terms shall be governed by and construed in accordance with the laws of the United Arab Emirates, without regard to its conflict of law provisions.</p>
+    </section>
+  </div>
+);
